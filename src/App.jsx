@@ -1,20 +1,33 @@
 import Navbar from "./components/navigation/Navbar"
-import ListBox from "./components/main/listBox/ListBox"
-import WatchedBox from "./components/main/watchedBox/WatchedBox"
+import NumResults from "./components/navigation/NumResults"
+
+import Box from "./components/main/Box"
+import MovieList from "./components/main/listBox/MovieList"
+import Summary from "./components/main/watchedBox/Summary"
+import WatchedList from "./components/main/watchedBox/WatchedList"
+
+import { tempWatchedData, tempMovieData } from "./assets/data"
 
 import { useState } from "react"
 
-import { tempMovieData } from "./assets/data"
-
 const App = () => {
   const [movies, setMovies] = useState(tempMovieData)
+  const [watched, setWatched] = useState(tempWatchedData)
 
   return (
     <>
-      <Navbar movies={movies} />
+      <Navbar>
+        <NumResults movies={movies} />
+      </Navbar>
       <main className="main">
-        <ListBox movies={movies} />
-        <WatchedBox />
+        <Box>
+          <MovieList movies={movies} />
+        </Box>
+
+        <Box>
+          <Summary watched={watched} />
+          <WatchedList watched={watched} />
+        </Box>
       </main>
     </>
   )
